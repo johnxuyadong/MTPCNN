@@ -155,15 +155,9 @@ class MFPM(nn.Module):
 
         # x_cat = self.conv_cat(torch.cat((x1, x2, x3), dim=1))
 
-        x1 = self.relu(x0 + x_cat)
+        x11 = self.relu(x0 + x_cat)
 
-        con1 = self.shrinkage(x1)
-        con2 = self.shrinkage1(x1)
-
-        con = self.fuse(torch.cat([con1, con2], dim=1))
-        # con = torch.add(con1, con2)
-        #
-        #
+        con = self.shrinkage(x11)
         res1 = self.conv_res(x)
         x1_add = torch.add(con, res1)
         x1_add = self.relu(x1_add)
